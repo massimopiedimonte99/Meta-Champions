@@ -1,0 +1,29 @@
+# Qt Creator / CMake build artifacts
+*.user
+*.autosave
+*.obj
+*.o
+*.a
+*.lib
+*.so
+*.dll
+*.exe
+*.log
+*.moc
+*.qmlc
+*.qmlcache
+
+# Qt Creator specific files
+*.pro.user
+*.qbs.user
+*.creator.user
+*.cbp.user
+
+# Backup / temp files
+*~
+*.swp
+*.DS_Store
+
+# Ignore build folder if it's outside the repo
+/build/
+

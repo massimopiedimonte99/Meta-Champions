@@ -1,0 +1,11 @@
+<RCC>
+    <qresource prefix="/Res"/>
+    <qresource prefix="/">
+        <file>assets/logo.png</file>
+        <file>assets/search.png</file>
+        <file>assets/Roboto.ttf</file>
+        <file>Logo.qml</file>
+        <file>InputBox.qml</file>
+        <file>SharedData.qml</file>
+    </qresource>
+</RCC>
