@@ -104,6 +104,7 @@ ApplicationWindow {
             console.log(JSON.stringify(obj))
         }
 
+        // TODO: ritorna un oggetto con winrate e nome campione normalizzato
         function onGamesFetched(winRate) {
             SharedData.isLoading = false
 

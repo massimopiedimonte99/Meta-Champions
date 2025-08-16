@@ -16,12 +16,13 @@ Item {
             width: parent.width * 0.6
             height: parent.height
 
+            // TODO: Sostituire la versione 15.16.1 con l'ultima disponibile da API (https://ddragon.leagueoflegends.com/api/versions.json)
             Image {
                 id: detailPic
                 width: 250
                 height: 250
                 anchors.centerIn: parent
-                source: "qrc:/assets/logo.png"
+                source: "https://ddragon.leagueoflegends.com/cdn/15.16.1/img/champion/Ahri.png"
                 fillMode: Image.PreserveAspectFit
             }
         }
