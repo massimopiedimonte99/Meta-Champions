@@ -64,9 +64,10 @@ private:
 
     QString m_summonerName;
 
-    /** Incrementa questo valore per ottenere un pool di incontri maggiori e rendere la statistica così più veritiera
+    /** Incrementa questi valori per ottenere un pool di incontri maggiori e rendere la statistica così più veritiera
         Lascio il counter basso per rispettare le limitazioni offerte dal piano gratuito della Riot API */
-    size_t m_matchesPerPuuid = 1;
+    size_t m_puuidsToCalc       = 1;    // No, di PUUID da analizzare
+    size_t m_matchesPerPuuid    = 1;    // No. di match per ogni PUUID da analizzare
 
     int16_t     m_winCounter;
     uint16_t    m_winRate;

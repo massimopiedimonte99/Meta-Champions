@@ -72,7 +72,7 @@ void Net::rf__FetchGames(QNetworkReply* reply)
             if(!obj["inactive"].toBool()) {
                 m_puuids.enqueue(obj["puuid"].toString());
             }
-            if(++dummyCounter == 1) break;
+            if(++dummyCounter == m_puuidsToCalc) break;
         }
 
         // Per ogni PUUID
@@ -117,16 +117,6 @@ void Net::rf__FetchMatchInfo(QNetworkReply* reply)
             if(isSelectedSummoner && m_winCounter == -1) m_winCounter = 0;
             if(isSelectedSummoner && isWin) m_winCounter++;
         }
-
-        // SE...
-        //  m_winCounter > 0    - Calcola win-rate
-        //  m_winCounter = 0    - Il summoner è stato trovato nel pool di match analizzati ma non ha vittorie (restituisci N.D.)
-        //  m_winCounter = -1   - Il summoner non è stato trovato nel pool di match analizzati
-        if(m_winCounter == -1 || m_winCounter == 0) emit gamesFetched(generateResult("N"));
-        else                                        emit gamesFetched(generateResult("S"));
-
-
-
     }
     else emit errorOccurred("Risposta non valida");
 
@@ -235,6 +225,12 @@ void Net::processNextMatchByPuuid()
 void Net::processNextMatchInfoByMatchId()
 {
     if(m_matches.isEmpty()) {
+        // SE...
+        //  m_winCounter > 0    - Calcola win-rate
+        //  m_winCounter = 0    - Il summoner è stato trovato nel pool di match analizzati ma non ha vittorie (restituisci N.D.)
+        //  m_winCounter = -1   - Il summoner non è stato trovato nel pool di match analizzati
+        if(m_winCounter == -1 || m_winCounter == 0) emit gamesFetched(generateResult("N"));
+        else                                        emit gamesFetched(generateResult("S"));
         return;
     }
 
