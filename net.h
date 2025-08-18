@@ -26,6 +26,13 @@ public:
         FetchMatches,           // 3. Ottengo le informazioni dei match -- Se il summoner che mi interessa è giocato in quel match calcolo il win-rate
     };
 
+    struct SummonerInfoDto {
+        QString summonerName;
+        float winRate;
+
+        SummonerInfoDto(QString _summonerName, float _winRate) : summonerName(std::move(_summonerName)), winRate(_winRate) {};
+    };
+
     QString apiKey() const;
     void setApiKey(const QString &newApiKey);
 
@@ -44,7 +51,7 @@ public:
 signals:
     void errorOccurred(QString errorMsg);
     void championsFetched(QJsonObject obj);
-    void gamesFetched(float winRate);
+    void gamesFetched(QVariantMap res);
 
 private:
     QNetworkAccessManager m_manager;
@@ -69,6 +76,7 @@ private:
     void processNextMatchByPuuid();
     void processNextMatchInfoByMatchId();
     float calculateWinRate();
+    QVariantMap generateResult(QString flagCanGenerate);
 
 private slots:
     void onReplyFinished(QNetworkReply* reply);

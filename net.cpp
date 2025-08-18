@@ -122,8 +122,8 @@ void Net::rf__FetchMatchInfo(QNetworkReply* reply)
         //  m_winCounter > 0    - Calcola win-rate
         //  m_winCounter = 0    - Il summoner è stato trovato nel pool di match analizzati ma non ha vittorie (restituisci N.D.)
         //  m_winCounter = -1   - Il summoner non è stato trovato nel pool di match analizzati
-        if(m_winCounter == -1 || m_winCounter == 0) emit gamesFetched(-1);
-        else                                        emit gamesFetched(calculateWinRate());
+        if(m_winCounter == -1 || m_winCounter == 0) emit gamesFetched(generateResult("N"));
+        else                                        emit gamesFetched(generateResult("S"));
 
 
 
@@ -207,6 +207,19 @@ QString Net::normalizeSummonerName(const QString &summonerName)
 float Net::calculateWinRate()
 {
     return (static_cast<float>(m_winCounter) / m_matchesPerPuuid) * 100;
+}
+
+QVariantMap Net::generateResult(QString flagCanGenerate)
+{
+    Net::SummonerInfoDto app = flagCanGenerate.compare("S", Qt::CaseInsensitive) == 0 ?
+                                Net::SummonerInfoDto(m_summonerName, calculateWinRate()) :
+                                Net::SummonerInfoDto(m_summonerName, -1);
+
+    QVariantMap res;
+    res["summonerName"] = app.summonerName;
+    res["winRate"] = app.winRate;
+
+    return res;
 }
 
 void Net::processNextMatchByPuuid()

@@ -20,12 +20,14 @@ qt_add_qml_module(appMetaChampions
     QML_FILES Main.qml Logo.qml InputBox.qml SharedData.qml DetailPage.qml
     RESOURCES Resources.qrc
     SOURCES net.h net.cpp
+    RESOURCES assets/back.png
 )
 
 qt_add_resources(appMetaChampions "assets"
     PREFIX "/"
     FILES   assets/logo.png
             assets/search.png
+            assets/back.png
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.

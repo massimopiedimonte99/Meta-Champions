@@ -17,12 +17,11 @@ import MetaChampions 1.0
         - Implementate un Singleton per gestire le proprietà condivise (ref. https://chatgpt.com/c/689f81f1-a190-8331-934f-34cfccfc9ad2) - ✅
         - Dividere il file "Main.qml" in "Logo.qml" e "InputBox.qml" - ✅
         - Implementare lo StackView per la pagina dettaglio - ✅
-        - Scrittura della pagina di dettaglio
+        - Scrittura della pagina di dettaglio - ✅
         - Implementare un meccanismo di auto-complete sul campo di testo per evitare errori di ortografia
-        - Gestire il click del button di ricerca in modo tale da bloccarsi se la ricerca è in corso
+        - Gestire il click del button di ricerca in modo tale da bloccarsi se la ricerca è in corso - ✅
         - Implementare gestione try/catch
         - Implementare un loader che blocchi le interazioni dell'utente con l'applicazione
-        - Animare il cambio pagina
 
     Di seguito un link con la bozza di progetto e la to-do list originale: https://pastebin.com/raw/FrDXWMtr */
 
@@ -40,11 +39,18 @@ ApplicationWindow {
     property int searchBtnSize: 70
     property var searchBtnColor: Qt.rgba(0.608, 0.608, 0.608, 1)
 
+    // ---- Background
+    Rectangle {
+      anchors.fill: parent
+      color: "white"
+      z: -1
+  }
+
     // ---- StackView
     StackView {
         id: stackView
         anchors.fill: parent
-        initialItem: detailPage
+        initialItem: homePage
         focus: true
     }
 
@@ -77,7 +83,7 @@ ApplicationWindow {
                 anchors.top: logoWrapper.bottom
 
                 onSearchSummoner: function(summoner) {
-                    submit(summoner);
+                    submit(summoner)
                 }
             }
         }
@@ -89,6 +95,9 @@ ApplicationWindow {
 
         Item {
             id: detailPageWrapper
+
+            width: root.width
+            height: root.height
 
             DetailPage {
                 id: detailPageRow
@@ -104,8 +113,10 @@ ApplicationWindow {
             console.log(JSON.stringify(obj))
         }
 
-        // TODO: ritorna un oggetto con winrate e nome campione normalizzato
-        function onGamesFetched(winRate) {
+        function onGamesFetched(res) {
+            let summonerName    = res['summonerName']
+            let winRate         = res['winRate']
+
             SharedData.isLoading = false
 
             if(winRate === -1) {
@@ -113,12 +124,16 @@ ApplicationWindow {
                 return
             }
 
-            stackView.push(detailPage)
             SharedData.winRateRounded = Math.round(winRate * 10) / 10
-            console.log(SharedData.winRateRounded)
+            SharedData.summonerName = summonerName
+            stackView.push(detailPage)
+
+            console.log("Summoner Name: " + SharedData.summonerName)
+            console.log("Champion Name: " + SharedData.winRateRounded)
         }
 
         function onErrorOccurred(msg) {
+            SharedData.isLoading = false
             console.log("Errore: " + msg)
         }
     }
