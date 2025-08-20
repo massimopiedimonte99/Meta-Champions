@@ -120,7 +120,7 @@ ApplicationWindow {
             SharedData.isLoading = false
 
             if(winRate === -1) {
-                console.log("Dati insufficienti")
+                console.error("Dati insufficienti")
                 return
             }
 
