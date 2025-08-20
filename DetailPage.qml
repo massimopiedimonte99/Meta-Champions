@@ -34,6 +34,7 @@ Item {
             anchors.fill: parent
             anchors.margins: 15
             source: "qrc:/assets/back.png" // https://www.flaticon.com/free-icons/back
+            opacity: 0.5
         }
 
         MouseArea {

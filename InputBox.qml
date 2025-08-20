@@ -49,6 +49,8 @@ Item {
                 }
             }
 
+            /**
+              * Implementazione completa di un button di ricerca (rimosso per rendere l'interfaccia più intuitiva e immediata)
             Button {
                 id: searchBtn
                 width: inputBtn.height
@@ -83,6 +85,8 @@ Item {
                     }
                 }
             }
+
+            */
         }
 
         ListView {
@@ -124,7 +128,7 @@ Item {
                 height: inputBtn.height
                 radius: 5
                 border.width: 1
-                border.color: '#e3e3e3'
+                border.color: searchBtnColor
 
                 Row {
                     anchors.fill: parent
@@ -151,7 +155,8 @@ Item {
                     cursorShape: Qt.PointingHandCursor
                     hoverEnabled: true
                     onClicked: function () {
-                        console.log(name)
+                        SharedData.isLoading = true
+                        inputBoxWrapper.searchSummoner(riotParsedName)
                     }
                 }
             }

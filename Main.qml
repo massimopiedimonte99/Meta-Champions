@@ -37,7 +37,7 @@ ApplicationWindow {
 
     property int logoSize: 300
     property int searchBtnSize: 70
-    property var searchBtnColor: Qt.rgba(0.608, 0.608, 0.608, 1)
+    property var searchBtnColor: '#e3e3e3'
 
     // ---- Background
     Rectangle {
