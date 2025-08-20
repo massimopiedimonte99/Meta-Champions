@@ -110,7 +110,7 @@ Item {
                 ListElement { name: "Varus";        riotParsedName: "Varus" }
                 ListElement { name: "Vayne";        riotParsedName: "Vayne" }
                 ListElement { name: "Veigar";       riotParsedName: "Veigar" }
-                ListElement { name: "Velkoz";       riotParsedName: "Velkoz" }
+                ListElement { name: "Vel Koz";      riotParsedName: "Velkoz" }
                 ListElement { name: "Vex";          riotParsedName: "Vex" }
                 ListElement { name: "Vi";           riotParsedName: "Vi" }
                 ListElement { name: "Viego";        riotParsedName: "Viego" }

@@ -18,7 +18,7 @@ import MetaChampions 1.0
         - Dividere il file "Main.qml" in "Logo.qml" e "InputBox.qml" - ✅
         - Implementare lo StackView per la pagina dettaglio - ✅
         - Scrittura della pagina di dettaglio - ✅
-        - Implementare un meccanismo di auto-complete sul campo di testo per evitare errori di ortografia
+        - Implementare un meccanismo di auto-complete sul campo di testo per evitare errori di ortografia - ✅
         - Gestire il click del button di ricerca in modo tale da bloccarsi se la ricerca è in corso - ✅
         - Implementare gestione try/catch
         - Implementare un loader che blocchi le interazioni dell'utente con l'applicazione
