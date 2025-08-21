@@ -25,7 +25,7 @@ int main(int argc, char *argv[])
 
     Net *net = new Net(&app);
     net->setRegionInfo("europe.api.riotgames.com");
-    net->setApiKey("RGAPI-1dfd2fc9-0ff3-448c-b5ca-0194f7dc9527");
+    net->setApiKey("<API-KEY-WAS-CHANGED-SORRY>");
 
     engine.rootContext()->setContextProperty("Net", net);
 
