@@ -22,10 +22,6 @@ Item {
             anchors.horizontalCenter: parent.horizontalCenter
             spacing: 10
 
-            Column {
-
-            }
-
             TextField {
                 id: inputBtn
                 width: 500
@@ -48,45 +44,6 @@ Item {
                     }
                 }
             }
-
-            /**
-              * Implementazione completa di un button di ricerca (rimosso per rendere l'interfaccia più intuitiva e immediata)
-            Button {
-                id: searchBtn
-                width: inputBtn.height
-                height: inputBtn.height
-                enabled: inputBtn.text !== '' && !SharedData.isLoading
-
-                background: Rectangle {
-                    id: rect1
-                    anchors.fill: parent
-                    radius: 5
-                    border.color: searchBtnColor
-                    opacity: searchBtn.enabled ? 1 : 0.5
-                }
-
-                contentItem: Image {
-                    id: searchBtnIcon
-                    fillMode: Image.PreserveAspectFit
-                    anchors.fill: parent
-                    anchors.margins: 20
-                    opacity: searchBtn.enabled ? 1 : 0.5
-                    source: "qrc:/assets/search.png" // https://www.flaticon.com/free-icons/magnifying-glass
-                }
-
-                MouseArea {
-                    anchors.fill: parent
-                    enabled: parent.enabled
-                    cursorShape: parent.enabled ? Qt.PointingHandCursor : Qt.ForbiddenCursor
-                    hoverEnabled: true
-                    onClicked: {
-                            SharedData.isLoading = true
-                            inputBoxWrapper.searchSummoner(inputBtn.text)
-                    }
-                }
-            }
-
-            */
         }
 
         ListView {
@@ -96,27 +53,7 @@ Item {
             clip: true
             visible: inputBtn.text !== ''
 
-            // TODO: Interrogare la Riot API per ottenere una lista completa e aggiornata (qui lascio un po' di placeholder...)
-            // TODO: Spostare questo model in un file .qml dedicato
-            ListModel {
-                id: summonerModel
-                ListElement { name: "Aatrox";       riotParsedName: "Aatrox" }
-                ListElement { name: "Ahri";         riotParsedName: "Ahri" }
-                ListElement { name: "Akali";        riotParsedName: "Akali" }
-                ListElement { name: "Akshan";       riotParsedName: "Akshan" }
-                ListElement { name: "Alistar";      riotParsedName: "Alistar" }
-                ListElement { name: "Ambessa";      riotParsedName: "Ambessa" }
-                ListElement { name: "Amumu";        riotParsedName: "Amumu" }
-                ListElement { name: "Varus";        riotParsedName: "Varus" }
-                ListElement { name: "Vayne";        riotParsedName: "Vayne" }
-                ListElement { name: "Veigar";       riotParsedName: "Veigar" }
-                ListElement { name: "Vel Koz";      riotParsedName: "Velkoz" }
-                ListElement { name: "Vex";          riotParsedName: "Vex" }
-                ListElement { name: "Vi";           riotParsedName: "Vi" }
-                ListElement { name: "Viego";        riotParsedName: "Viego" }
-                ListElement { name: "Viktor";       riotParsedName: "Viktor" }
-                ListElement { name: "Vladimir";     riotParsedName: "Vladimir" }
-            }
+            SummonerModel { id: summonerModel }
 
             model: ListModel {
                 id: findSummonerBoxModel
@@ -154,6 +91,8 @@ Item {
                     anchors.fill: parent
                     cursorShape: Qt.PointingHandCursor
                     hoverEnabled: true
+                    enabled: !SharedData.isLoading
+
                     onClicked: function () {
                         SharedData.isLoading = true
                         inputBoxWrapper.searchSummoner(riotParsedName)

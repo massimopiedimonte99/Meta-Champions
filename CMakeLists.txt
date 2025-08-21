@@ -21,6 +21,7 @@ qt_add_qml_module(appMetaChampions
     RESOURCES Resources.qrc
     SOURCES net.h net.cpp
     RESOURCES assets/back.png
+    QML_FILES SummonerModel.qml
 )
 
 qt_add_resources(appMetaChampions "assets"

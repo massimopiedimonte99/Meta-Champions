@@ -42,7 +42,10 @@ Item {
             enabled: parent.enabled
             cursorShape: Qt.PointingHandCursor
             hoverEnabled: true
-            onClicked: stackView.pop()
+            onClicked: {
+                stackView.pop();
+                SharedData.clearInputBox();
+            }
         }
     }
 

@@ -21,7 +21,7 @@ import MetaChampions 1.0
         - Implementare un meccanismo di auto-complete sul campo di testo per evitare errori di ortografia - ✅
         - Gestire il click del button di ricerca in modo tale da bloccarsi se la ricerca è in corso - ✅
         - Implementare gestione try/catch
-        - Implementare un loader che blocchi le interazioni dell'utente con l'applicazione
+        - Implementare un loader che blocchi le interazioni dell'utente con l'applicazione- ✅
 
     Di seguito un link con la bozza di progetto e la to-do list originale: https://pastebin.com/raw/FrDXWMtr */
 
@@ -37,7 +37,7 @@ ApplicationWindow {
 
     property int logoSize: 300
     property int searchBtnSize: 70
-    property var searchBtnColor: '#e3e3e3'
+    property string searchBtnColor: '#e3e3e3'
 
     // ---- Background
     Rectangle {
@@ -71,6 +71,23 @@ ApplicationWindow {
                 onClicked: inputBoxWrapper.inputBtn.focus = false
             }
 
+            Text {
+                id: loadingText
+                y: inputBoxWrapper.y - 30
+                anchors.horizontalCenter: parent.horizontalCenter
+                font.pointSize: 14
+                text: qsTr("⌛️")
+                color: 'black'
+                visible: SharedData.isLoading
+
+                RotationAnimator on rotation {
+                    from: 0
+                    to: 360
+                    duration: 2000
+                    loops: Animation.Infinite
+                }
+            }
+
             // Logo
             Logo {
                 id: logoWrapper
@@ -84,6 +101,15 @@ ApplicationWindow {
 
                 onSearchSummoner: function(summoner) {
                     submit(summoner)
+                }
+            }
+
+            // Connessione con SharedData
+            Connections {
+                target: SharedData
+
+                function onClearInputBox() {
+                    inputBoxWrapper.inputBtn.text = ""
                 }
             }
         }
@@ -119,6 +145,7 @@ ApplicationWindow {
 
             SharedData.isLoading = false
 
+            // Si potrebbe implementare una pagina
             if(winRate === -1) {
                 console.error("Dati insufficienti")
                 return
@@ -128,8 +155,8 @@ ApplicationWindow {
             SharedData.summonerName = summonerName
             stackView.push(detailPage)
 
-            console.log("Summoner Name: " + SharedData.summonerName)
-            console.log("Champion Name: " + SharedData.winRateRounded)
+            console.log("Summoner Name: "   + SharedData.summonerName)
+            console.log("Win Rate (%): "    + SharedData.winRateRounded)
         }
 
         function onErrorOccurred(msg) {
